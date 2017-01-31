@@ -13,6 +13,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 gem 'omniauth-meetup'
+gem 'dotenv-rails'
+gem 'rest-client'
 
 group :development, :test do
   gem 'byebug', platform: :mri
