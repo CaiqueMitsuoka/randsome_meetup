@@ -1,0 +1,8 @@
+<h1><%= @event['name'] %>
+<h2><%= @event['group']['name'] %>
+<p>People present:
+<p><%= @event['yes_rsvp_count'] %>
+<p>@
+<p><%= @event['venue']['name'] %>
+
+<%= link_to 'random', "/events/#{@event['group']['urlname']}/#{@event['id']}/random" %>
