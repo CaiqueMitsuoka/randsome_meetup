@@ -3,8 +3,8 @@ class BaseMeetup
     @token = token
   end
 
-  def self_events
-    get '/self/events'
+  def self_events(desc = true)
+    get "/self/events?desc=#{desc}"
   end
 
   def attendence(urlname, event_id)
