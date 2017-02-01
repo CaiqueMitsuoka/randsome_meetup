@@ -4,19 +4,19 @@ class BaseMeetup
   end
 
   def self_events(desc = true)
-    get "/self/events?desc=#{desc}"
+    parse_json_array( get("/self/events?desc=#{desc}") )
   end
 
   def attendence(urlname, event_id)
-    get("/#{urlname}/events/#{event_id}/attendance")
+    parse_json_array( get("/#{urlname}/events/#{event_id}/attendance") )
   end
 
   def event(urlname, event_id)
-    get("/#{urlname}/events/#{event_id}")
+    parse_json( get("/#{urlname}/events/#{event_id}") )
   end
 
   def get(endpoint, headers = header)
-    parse_json( RestClient.get(meetup_url(endpoint), headers) )
+    RestClient.get(meetup_url(endpoint), headers)
   end
 
   private
@@ -28,7 +28,13 @@ class BaseMeetup
     { Authorization: "Bearer #{@token}" }
   end
 
+  def parse_json_array(response)
+    JSON.parse(response.to_s).reduce([]) do |collection, item|
+      collection.push(item.deep_symbolize_keys)
+    end
+  end
+
   def parse_json(response)
-    JSON.parse(response.to_s)
+    JSON.parse(response.to_s).deep_symbolize_keys
   end
 end
