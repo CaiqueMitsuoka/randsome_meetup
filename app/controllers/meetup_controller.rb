@@ -3,7 +3,7 @@ class MeetupController < ApplicationController
   end
 
   def callback
-    session['auth'] = request.env['omniauth.auth']
+    session[:auth] = request.env['omniauth.auth']
     redirect_to '/events'
   end
 end
