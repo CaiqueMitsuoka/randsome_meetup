@@ -17,7 +17,7 @@ class EventsController < ApplicationController
 
   private
   def meetup
-    BaseMeetup.new session[:auth]['credentials']['token']
+    BaseMeetup.new session
   end
 
   def urlname
