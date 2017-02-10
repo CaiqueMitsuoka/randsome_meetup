@@ -15,11 +15,12 @@ gem 'omniauth-meetup'
 gem 'dotenv-rails'
 gem 'rest-client'
 gem 'rails-assets-normalize-css', source: 'https://rails-assets.org'
+gem 'rails-controller-testing'
 
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'pry'
-  gem 'rspec'
+  gem 'rspec-rails'
 end
 
 group :development do
