@@ -6,7 +6,7 @@ class BaseMeetup
   end
 
   def self_events(desc = true)
-    parse_json_array( get("/self/events?desc=#{desc}") )
+    parse_json_array( get("/self/events?desc=#{desc}&fields=event_hosts") )
   end
 
   def attendence(urlname, event_id)
