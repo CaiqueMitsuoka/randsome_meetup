@@ -15,6 +15,7 @@ gem 'turbolinks', '~> 5'
 gem 'omniauth-meetup'
 gem 'dotenv-rails'
 gem 'rest-client'
+gem 'rails-assets-normalize-css', source: 'https://rails-assets.org'
 
 group :development, :test do
   gem 'byebug', platform: :mri
