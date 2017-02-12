@@ -1,11 +1,6 @@
 class EventsController < ApplicationController
   def index
     @events = meetup.self_events
-    @events = @events.select do |event|
-      event[:event_hosts].find do |host|
-        host[:id] == session[:auth]["info"]["id"]
-      end
-    end
   end
 
   def show
