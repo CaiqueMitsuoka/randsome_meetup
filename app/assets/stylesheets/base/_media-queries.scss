@@ -1,0 +1,15 @@
+@mixin media($type) {
+  @if $type == 'extra-small' {
+    @media screen and (max-width: $breakpoint-extra-small) { @content; }
+
+  } @else if $type == 'small' {
+    @media screen and (min-width: $breakpoint-extra-small + 1px) { @content; }
+
+  } @else if $type == 'medium' {
+    @media screen and (min-width: $breakpoint-small + 1px) { @content; }
+
+  } @else if $type == 'large' {
+    @media screen and (min-width: $breakpoint-medium + 1px) { @content; }
+
+  }
+}

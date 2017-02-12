@@ -1,0 +1,30 @@
+$title-color: $white;
+$first-color: $san-juan;
+$second-color: $east-bay;
+
+.landing-page {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-image: linear-gradient(to left, $first-color, $second-color);
+
+  &__title {
+    font-family: $title-font;
+    font-weight: $bold-weight;
+    font-size: 3.125rem;
+    color: $title-color;
+    text-transform: uppercase;
+    text-align: center;
+
+    @include media('medium') {
+      font-size: 4.375rem;
+    }
+  }
+
+  &__gh-corner {
+    fill: $white;
+    color: $first-color;
+  }
+}
