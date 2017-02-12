@@ -1,0 +1,22 @@
+.button {
+  border-radius: $default-radius;
+  text-decoration: none;
+  color: $white;
+  background-color: $hippie-blue;
+
+  &--default {
+    padding: .68rem .81rem;
+  }
+
+  &--large {
+    padding: 1.36rem 1.62rem;
+    font-size: 1.25rem;
+  }
+
+  &--hollow {
+    border-width: .125rem;
+    border-style: solid;
+    border-color: $mercury;
+    background-color: transparent;
+  }
+}
