@@ -82,7 +82,7 @@ RSpec.describe EventsController, type: :controller do
           thumb: img_name
         }
       }
-      @base_meetup = double('BaseMeetup', attendence: [{ member: person }])
+      @base_meetup = double('BaseMeetup', attendance: [{ member: person }])
       allow_any_instance_of(EventsController).to receive(:meetup).and_return(@base_meetup)
     end
 
@@ -97,7 +97,7 @@ RSpec.describe EventsController, type: :controller do
     end
 
     it 'call attendence of base meetup' do
-      expect(@base_meetup).to receive(:attendence).with('guru-sorocaba','1b3b4fe')
+      expect(@base_meetup).to receive(:attendance).with('guru-sorocaba','1b3b4fe')
       get_random_attendee
     end
 
