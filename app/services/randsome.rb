@@ -4,7 +4,7 @@ class Randsome
   end
 
   def random_attendee(urlname , event_id)
-    attendees = meetup.attendence(urlname , event_id)
+    attendees = meetup.attendance(urlname , event_id)
     attendees.sample[:member]
   end
 
