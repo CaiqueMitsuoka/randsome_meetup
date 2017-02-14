@@ -5,5 +5,5 @@ Rails.application.routes.draw do
   # events
   get '/events', to: 'events#index'
   get '/events/:urlname/:event_id', to: 'events#show'
-  get '/events/:urlname/:event_id/random', to: 'events#random'
+  get '/events/:urlname/:event_id/random', to: 'events#random_attendee'
 end
