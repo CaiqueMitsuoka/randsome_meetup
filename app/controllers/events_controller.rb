@@ -1,23 +1,25 @@
 class EventsController < ApplicationController
   def index
-    @events = meetup.self_events
+    @events = randsome.available_events
   end
 
   def show
     @event = meetup.event(urlname, event_id)
   end
 
-  def random_attendee
-    attendes = meetup.attendence(urlname, event_id)
-    person = attendes.sample.member
-    @image = person[:photo][:thumb] if person && person[:photo]
-    @image ||= ['brown-egg.jpg','white-egg.jpg'].shuffle.pop
+  def random
+    person = randsome.random_attendee(urlname , event_id)
+    @image = meetup.profile_image(person[:id])
     @name = person[:name]
   end
 
   private
   def meetup
     BaseMeetup.new session
+  end
+
+  def randsome
+    Randsome.new session
   end
 
   def urlname
