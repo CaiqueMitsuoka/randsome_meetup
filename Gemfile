@@ -21,6 +21,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'pry'
   gem 'rspec-rails'
+  gem 'rubocop'
 end
 
 group :development do
