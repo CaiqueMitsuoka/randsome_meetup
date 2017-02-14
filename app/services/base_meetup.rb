@@ -19,7 +19,10 @@ class BaseMeetup
 
   def profile_image (member_id)
     member = parse_json ( get("/members/#{member_id}") )
-    member[:photo][:photo_link]
+    if member[:photo]
+      return member[:photo][:photo_link]
+    end
+    ['brown-egg.jpg','white-egg.jpg'].sample
   end
 
   def get(endpoint)
