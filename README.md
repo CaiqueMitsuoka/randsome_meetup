@@ -19,3 +19,15 @@ Go to [this link](https://secure.meetup.com/pt-BR/meetup_api/oauth_consumers/) a
 1. Exec `bundler install`
 1. Exec `bundle exec rails server`.
 1. Enjoy your life.
+
+## Using Docker:
+
+To run the application using docker, you only need to build the image  
+```
+$ docker-compose build web
+```
+and then, startup the web server
+```
+$ docker-compose up web
+```
+After doing that, you can access the application in the port 3000 of your localhost
