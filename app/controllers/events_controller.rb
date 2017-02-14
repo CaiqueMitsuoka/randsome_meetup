@@ -10,7 +10,6 @@ class EventsController < ApplicationController
   def random_attendee
     person = randsome.random_attendee(urlname , event_id)
     @image = meetup.profile_image(person[:id])
-    @image ||= ['brown-egg.jpg','white-egg.jpg'].shuffle.pop
     @name = person[:name]
   end
 
