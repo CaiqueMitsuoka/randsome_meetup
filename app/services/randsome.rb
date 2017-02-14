@@ -5,7 +5,7 @@ class Randsome
 
   def random_attendee(urlname , event_id)
     attendees = meetup.attendence(urlname , event_id)
-    attendees.sample.member
+    attendees.sample[:member]
   end
 
   def available_events
