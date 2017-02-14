@@ -6,10 +6,7 @@ class BaseMeetup
   end
 
   def self_events(desc = true)
-    events = parse_json_array( get("/self/events?desc=#{desc}&fields=event_hosts") )
-    events.select! do |event|
-      hosted_by_user?( event[:event_hosts] )
-    end
+    parse_json_array( get("/self/events?desc=#{desc}&fields=event_hosts") )
   end
 
   def attendence(urlname, event_id)
@@ -18,6 +15,11 @@ class BaseMeetup
 
   def event(urlname, event_id)
     parse_json( get("/#{urlname}/events/#{event_id}") )
+  end
+
+  def profile_image (member_id)
+    member = parse_json ( get("/members/#{member_id}") )
+    member[:photo][:photo_link]
   end
 
   def get(endpoint)
@@ -65,9 +67,4 @@ class BaseMeetup
     JSON.parse(response.to_s).deep_symbolize_keys
   end
 
-  def hosted_by_user? (event_hosts)
-    event_hosts.any? do |host|
-      host[:id] == @session[:auth]["info"]["id"]
-    end
-  end
 end
