@@ -1,4 +1,7 @@
 # Randsome Meetup
+[![Build Status](https://travis-ci.org/CaiqueMitsuoka/randsome_meetup.svg?branch=master)](https://travis-ci.org/CaiqueMitsuoka/randsome_meetup)
+[![Code Climate](https://codeclimate.com/github/CaiqueMitsuoka/randsome_meetup/badges/gpa.svg)](https://codeclimate.com/github/CaiqueMitsuoka/randsome_meetup)
+
 
 Tired of being lost when someone need to make a give it away in the meetups?
 
