@@ -26,15 +26,17 @@ class BaseMeetup
   end
 
   def get(endpoint)
-    attempts ||= 0
-    begin
-      RestClient.get(meetup_url(endpoint), header)
-    rescue RestClient::Unauthorized
-      if !(attempts > 0)
-        attempts += 1
-        puts "Trying to refresh the session token..."
-        refresh_session_token
-        retry
+    Rails.cache.fetch(endpoint, expires: 5.minutes) do
+      attempts ||= 0
+      begin
+        RestClient.get(meetup_url(endpoint), header)
+      rescue RestClient::Unauthorized
+        if !(attempts > 0)
+          attempts += 1
+          puts "Trying to refresh the session token..."
+          refresh_session_token
+          retry
+        end
       end
     end
   end
