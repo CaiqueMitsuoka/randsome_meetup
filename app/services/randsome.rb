@@ -3,8 +3,8 @@ class Randsome
     @session = session
   end
 
-  def random_attendee(urlname , event_id)
-    attendees = meetup.attendence(urlname , event_id)
+  def random_attendee(urlname, event_id)
+    attendees = meetup.attendence(urlname, event_id)
     attendees.sample[:member]
   end
 
@@ -15,13 +15,14 @@ class Randsome
   end
 
   private
+
   def meetup
     BaseMeetup.new @session
   end
 
-  def hosted_by_user? (event_hosts)
+  def hosted_by_user?(event_hosts)
     event_hosts.any? do |host|
-      host[:id] == @session[:auth]["info"]["id"]
+      host[:id] == @session[:auth]['info']['id']
     end
   end
 end

@@ -17,8 +17,8 @@ class BaseMeetup
     parse_json( get("/#{urlname}/events/#{event_id}") )
   end
 
-  def profile_image (member_id)
-    member = parse_json ( get("/members/#{member_id}") )
+  def profile_image(member_id)
+    member = parse_json( get("/members/#{member_id}") )
     member[:photo][:photo_link]
   end
 
@@ -27,9 +27,9 @@ class BaseMeetup
     begin
       RestClient.get(meetup_url(endpoint), header)
     rescue RestClient::Unauthorized
-      if !(atempts > 0)
+      unless (atempts > 0)
         atempts += 1
-        puts "Trying to refresh the session token..."
+        puts 'Trying to refresh the session token...'
         refresh_session_token
         retry
       end

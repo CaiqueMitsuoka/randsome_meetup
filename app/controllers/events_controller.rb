@@ -8,12 +8,13 @@ class EventsController < ApplicationController
   end
 
   def random_attendee
-    person = randsome.random_attendee(urlname , event_id)
+    person = randsome.random_attendee(urlname, event_id)
     @image = meetup.profile_image(person[:id])
     @name = person[:name]
   end
 
   private
+
   def meetup
     BaseMeetup.new session
   end
