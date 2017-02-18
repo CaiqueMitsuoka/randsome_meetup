@@ -1,0 +1,30 @@
+.events {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  padding-bottom: 1.5625rem;
+
+  &__title {
+    font-family: $title-font;
+    font-weight: $bold-weight;
+    font-size: 3rem;
+    color: $white;
+    text-align: center;
+    letter-spacing: .125rem;
+  }
+
+  &__list {
+    @include media('large') {
+      width: 60%;
+    }
+
+    padding: 0;
+    margin: 0;
+    width: 90%;
+    list-style: none;
+  }
+
+  &__item:not(:last-of-type) {
+    margin-bottom: 1.5625rem;
+  }
+}
