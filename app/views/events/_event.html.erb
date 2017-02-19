@@ -1,0 +1,28 @@
+<%
+  datetime = DateTime.strptime(event[:time].to_s, '%Q').getlocal
+  day = datetime.day
+  month = I18n.t("date.abbr_month_names")[datetime.month]
+  year = datetime.year
+%>
+
+<li class="events__item">
+  <%= link_to "events/#{event[:group][:urlname]}/#{event[:id]}", class: "event" do %>
+    <%= time_tag datetime, class: "event__date" do %>
+      <span class="event__day"><%= day %></span>
+      <span class="event__month"><%= month %></span>
+      <span class="event__year"><%= year %></span>
+    <% end %>
+
+    <span class="event__info">
+      <span class="event__name"><%= event[:name] %></span>
+
+      <% if event[:venue] %>
+        <span class="event__venue">
+          <%= event[:venue].to_h[:name] %>,
+          <%= event[:venue].to_h[:city] %>
+        </span>
+      <% end%>
+    </span>
+  <% end %>
+</li>
+
