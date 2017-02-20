@@ -16,18 +16,14 @@ RSpec.describe BaseMeetup, type: :service do
   describe 'GET on Meetup.com API' do
     let(:return_payload_array) {
       '[{
-        "key0":"value",
-        "key1":true,
-        "key2":3,
-        "event_hosts":"someone"
+        "event_hosts":"someone",
+        "time":1487709706836
       }]'
     }
 
     let(:return_payload) {
       '{
-        "key0":"value",
-        "key1":true,
-        "key2":3
+        "time":1487709706836
       }'
     }
 
@@ -46,8 +42,16 @@ RSpec.describe BaseMeetup, type: :service do
       end
 
       it 'call #parse_json_array' do
-        expect(@meetup).to receive(:parse_json).with(return_payload)
+        expect(@meetup).to receive(:parse_json).with(return_payload).and_call_original
         @meetup.event(urlname, event_id)
+      end
+
+      context 'convert the payload to an object' do
+        it 'call Meetup::Event#new with the payload' do
+          expected_with = JSON.parse(return_payload).symbolize_keys
+          expect(Meetup::Event).to receive(:new).with(expected_with)
+          @meetup.event(urlname, event_id)
+        end
       end
     end
 
@@ -67,8 +71,34 @@ RSpec.describe BaseMeetup, type: :service do
       end
 
       it 'call #parse_json_array' do
-        expect(@meetup).to receive(:parse_json_array).with(return_payload_array)
+        expect(@meetup).to receive(:parse_json_array).with(return_payload_array).and_return([])
         @meetup.self_events()
+      end
+
+      context 'convert the payload to a collection' do
+        let(:payload) {
+          [
+            {
+              key1: 'value1'
+            },
+            {
+              key2: 'value2'
+            }
+          ]
+        }
+        before do
+          allow(@meetup).to receive(:parse_json_array).and_return(payload)
+        end
+
+        it 'maps the api response' do
+          expect(payload).to receive(:map)
+          @meetup.self_events()
+        end
+
+        it 'create new Meetup::Event for every item in payload' do
+          expect(Meetup::Event).to receive(:new).exactly(payload.length).times
+          @meetup.self_events()
+        end
       end
     end
 
@@ -83,8 +113,34 @@ RSpec.describe BaseMeetup, type: :service do
       end
 
       it 'call #parse_json_array' do
-        expect(@meetup).to receive(:parse_json_array).with(return_payload_array)
+        expect(@meetup).to receive(:parse_json_array).with(return_payload_array).and_return([])
         @meetup.attendance(urlname, event_id)
+      end
+
+      context 'convert the payload to a collection' do
+        let(:payload) {
+          [
+            {
+              key1: 'value1'
+            },
+            {
+              key2: 'value2'
+            }
+          ]
+        }
+        before do
+          allow(@meetup).to receive(:parse_json_array).and_return(payload)
+        end
+
+        it 'maps the api response' do
+          expect(payload).to receive(:map)
+          @meetup.attendance(urlname, event_id)
+        end
+
+        it 'create new Meetup::Event for every item in payload' do
+          expect(Meetup::Attendee).to receive(:new).exactly(payload.length).times
+          @meetup.attendance(urlname, event_id)
+        end
       end
     end
 
