@@ -2,6 +2,7 @@ class Meetup::Group
   attr_reader :name, :id, :urlname, :who
 
   def initialize(group_hash = {}, options = {})
+    group_hash = {} if group_hash.nil?
     group_hash.merge!(options)
     @name = group_hash[:name]
     @id = group_hash[:id]
