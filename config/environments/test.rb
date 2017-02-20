@@ -8,7 +8,8 @@ Rails.application.configure do
   }
 
   config.consider_all_requests_local       = true
-  config.action_controller.perform_caching = false
+  config.action_controller.perform_caching = true
+  config.cache_store = :null_store
 
   config.action_dispatch.show_exceptions = false
 
