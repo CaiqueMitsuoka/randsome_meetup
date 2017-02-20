@@ -1,8 +1,10 @@
 class BaseMeetup
-  def initialize(session)
-    @session = session
-    @token = session[:token]
-    @refresh_token = session[:refresh_token]
+  def initialize(session = nil, options = {})
+    if session || !options.empty?
+      @session = session
+      @token = session[:token] || options[:token]
+      @refresh_token = session[:refresh_token] || options[:refresh_token]
+    end
   end
 
   def self_events(desc = true)
@@ -18,11 +20,7 @@ class BaseMeetup
   end
 
   def profile_image (member_id)
-    member = parse_json ( get("/members/#{member_id}") )
-    if member[:photo]
-      return member[:photo][:photo_link]
-    end
-    ['brown-egg.jpg','white-egg.jpg'].sample
+    parse_json( get("/members/#{member_id}") )
   end
 
   def get(endpoint)
