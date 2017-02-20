@@ -5,12 +5,12 @@ class Randsome
 
   def random_attendee(urlname , event_id)
     attendees = meetup.attendance(urlname , event_id)
-    attendees.sample[:member]
+    attendees.sample
   end
 
   def available_events
     meetup.self_events.select! do |event|
-      hosted_by_user?( event[:event_hosts] )
+      hosted_by_user?( event.event_hosts )
     end
   end
 

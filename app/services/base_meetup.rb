@@ -8,15 +8,20 @@ class BaseMeetup
   end
 
   def self_events(desc = true)
-    parse_json_array( get("/self/events?desc=#{desc}&fields=event_hosts") )
+    events_json = get("/self/events?desc=#{desc}&fields=event_hosts")
+    events_hash = parse_json_array(events_json)
+    events_hash.map { |c| Meetup::Event.new(c) }
   end
 
   def attendance(urlname, event_id)
-    parse_json_array( get("/#{urlname}/events/#{event_id}/attendance") )
+    responses_json = get("/#{urlname}/events/#{event_id}/attendance")
+    responses_hash = parse_json_array( responses_json )
+    responses_hash.map { |response| Meetup::Attendee.new(response[:member]) }
   end
 
   def event(urlname, event_id)
-    parse_json( get("/#{urlname}/events/#{event_id}") )
+    event_hash = parse_json( get("/#{urlname}/events/#{event_id}") )
+    Meetup::Event.new(event_hash)
   end
 
   def profile_image (member_id)
