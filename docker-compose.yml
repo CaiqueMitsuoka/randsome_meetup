@@ -6,3 +6,5 @@ services:
       - .:/var/www/randsome_meetup
     ports:
       - "3000:3000"
+    stdin_open: true
+    tty: true
