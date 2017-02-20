@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe EventsController, type: :controller do
   let(:randsome) {
     double('Randsome',
-      random_attendee: { id: 'A41F1E1', name: name },
+      random_attendee: person,
       available_events: []
     )
   }
@@ -17,14 +17,7 @@ RSpec.describe EventsController, type: :controller do
     )
   }
 
-  let(:person) {
-    {
-      name: name,
-      photo: {
-        thumb: img_name
-      }
-    }
-  }
+  let(:person) { double('Attendee', name: name, photo: img_name) }
 
   let(:name) { 'Mary' }
 
@@ -37,7 +30,7 @@ RSpec.describe EventsController, type: :controller do
     allow_any_instance_of(EventsController).to receive(:randsome).and_return(randsome)
     allow_any_instance_of(Randsome).to receive(:meetup).and_return(base_meetup)
   end
-  
+
   describe 'GET #index' do
     it 'assign events' do
       get :index
@@ -67,14 +60,9 @@ RSpec.describe EventsController, type: :controller do
   end
 
   describe 'GET #random_attendee' do
-    it 'assign image' do
+    it 'assign attendee' do
       get_random_attendee
-      expect(assigns(:image)).to eq(img_name)
-    end
-
-    it 'assign name' do
-      get_random_attendee
-      expect(assigns(:name)).to eq(name)
+      expect(assigns(:person)).to eq(person)
     end
 
     it 'call attendence of randsome' do
