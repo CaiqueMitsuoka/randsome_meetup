@@ -8,7 +8,7 @@ class EventsController < ApplicationController
   end
 
   def random_attendee
-    @person = randsome.random_attendee(urlname , event_id)
+    @person = AttendeePresenter.new(randsome.random_attendee(urlname , event_id))
   end
 
   private
