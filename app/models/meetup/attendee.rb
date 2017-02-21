@@ -9,10 +9,6 @@ class Meetup::Attendee
   end
 
   def photo
-    response = BaseMeetup.new.profile_image(@id)
-    unless response[:photo]
-      return ['brown-egg.jpg','white-egg.jpg'].sample
-    end
-    response[:photo][:photo_link]
+    BaseMeetup.new.profile_image(@id)
   end
 end
