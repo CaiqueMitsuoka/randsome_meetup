@@ -1,28 +1,31 @@
 class BaseMeetup
-  def initialize(session)
-    @session = session
-    @token = session[:token]
-    @refresh_token = session[:refresh_token]
+  def initialize(session = nil, options = {})
+    if session || !options.empty?
+      @session = session
+      @token = session[:token] || options[:token]
+      @refresh_token = session[:refresh_token] || options[:refresh_token]
+    end
   end
 
   def self_events(desc = true)
-    parse_json_array( get("/self/events?desc=#{desc}&fields=event_hosts") )
+    events_json = get("/self/events?desc=#{desc}&fields=event_hosts")
+    events_hash = parse_json_array(events_json)
+    events_hash.map { |c| Meetup::Event.new(c) }
   end
 
   def attendance(urlname, event_id)
-    parse_json_array( get("/#{urlname}/events/#{event_id}/attendance") )
+    responses_json = get("/#{urlname}/events/#{event_id}/attendance")
+    responses_hash = parse_json_array( responses_json )
+    responses_hash.map { |response| Meetup::Attendee.new(response[:member]) }
   end
 
   def event(urlname, event_id)
-    parse_json( get("/#{urlname}/events/#{event_id}") )
+    event_hash = parse_json( get("/#{urlname}/events/#{event_id}") )
+    Meetup::Event.new(event_hash)
   end
 
   def profile_image (member_id)
-    member = parse_json ( get("/members/#{member_id}") )
-    if member[:photo]
-      return member[:photo][:photo_link]
-    end
-    ['brown-egg.jpg','white-egg.jpg'].sample
+    parse_json( get("/members/#{member_id}") )
   end
 
   def get(endpoint)
