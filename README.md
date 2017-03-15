@@ -3,16 +3,22 @@
 [![Code Climate](https://codeclimate.com/github/CaiqueMitsuoka/randsome_meetup/badges/gpa.svg)](https://codeclimate.com/github/CaiqueMitsuoka/randsome_meetup)
 
 
-Tired of being lost when someone need to make a give it away in the meetups?
+ ## Tired of being lost when someone need to make a give it away in the meetups?
 
-Your problems are over.
+![tired](https://media.giphy.com/media/3oEjHGr1Fhz0kyv8Ig/giphy.gif)
 
-Randome Meetup will randomise a attendee of the selected Meetup for your.
+ ## Your problems are over. Randome Meetup will randomise a attendee of the selected Meetup for your.
+
+![boom](https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif)
 
 
 ## To run
 
-You will need to have Ruby 2.3.1 installed.
+![runforrest](https://media.giphy.com/media/1098j3EXblxjkQ/giphy.gif)
+
+## Dependencies
+
+- You will need to have Ruby 2.3.1 installed and docker.
 
 Go to [this link](https://secure.meetup.com/pt-BR/meetup_api/oauth_consumers/) and get the keys necessary to consume the OAuth api.
 
@@ -34,3 +40,5 @@ and then, startup the web server
 $ docker-compose up web
 ```
 After doing that, you can access the application in the port 3000 of your localhost
+
+![ok](https://media.giphy.com/media/kRXnZwKrPTwVq/giphy.gif)
