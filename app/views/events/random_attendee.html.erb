@@ -1,2 +1,6 @@
-<%= image_tag @person.photo %>
-<h1><%= @person.name %>
+<div class="random-attendee">
+  <%= image_tag @person.photo, class: "random-attendee__img" %>
+  <h2 class="random-attendee__name"><%= @person.name %></h2>
+  <button class="button button--large button--hollow random-attendee__button" onclick="reload()"> Sortear </button>
+  <canvas id="canvas"></canvas>
+</div>

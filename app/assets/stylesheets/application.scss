@@ -4,10 +4,10 @@
 @import "base/base";
 @import "base/media-queries";
 
-@import "landing-page";
-@import "events";
-
 @import "components/button";
 @import "components/event";
 @import "components/gh-corner";
 
+@import "landing-page";
+@import "events";
+@import "random-attendee";
