@@ -19,7 +19,7 @@ class Randsome
     BaseMeetup.new @session
   end
 
-  def hosted_by_user? (event_hosts)
+  def hosted_by_user?(event_hosts)
     event_hosts.any? do |host|
       host[:id] == @session[:auth]["info"]["id"]
     end
