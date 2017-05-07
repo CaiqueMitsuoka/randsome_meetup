@@ -24,7 +24,7 @@ class BaseMeetup
     Meetup::Event.new(event_hash)
   end
 
-  def profile_image (member_id)
+  def profile_image(member_id)
     parse_json( get("/members/#{member_id}") )
   end
 

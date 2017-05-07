@@ -1,5 +1,5 @@
 <li class="events__item">
-  <%= link_to "events/#{event.group.urlname}/#{event.id}", class: "event" do %>
+  <%= link_to "events/#{event.group.urlname}/#{event.id}/random", class: "event" do %>
     <%= time_tag event.time, class: "event__date" do %>
       <span class="event__day"><%= event.day %></span>
       <span class="event__month"><%= event.month %></span>
