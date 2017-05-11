@@ -1,6 +1,6 @@
 class MeetupController < ApplicationController
   def home
-    redirect_to events_path unless session.blank?
+    redirect_to events_path unless session[:auth].blank?
   end
 
   def callback
